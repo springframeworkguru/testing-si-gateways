@@ -10,7 +10,29 @@
 
     <beans:import resource="classpath*:/spring/si-product-gateway.xml"/>
 
-    <context:component-scan base-package="guru.springframework.si.testservice"/>
+    <context:component-scan base-package="guru.springframework.si.services"/>
 
-    <service-activator ref="productService" method="getProduct" input-channel="getProductChannel"/>
+    <service-activator ref="productServiceImpl" method="getProduct" input-channel="getProductChannel"/>
+
+    <gateway service-interface="guru.springframework.si.gateways.AddressGateway"/>
+    <gateway service-interface="guru.springframework.si.gateways.InventoryGateway"/>
+    <gateway service-interface="guru.springframework.si.gateways.OrderGateway"/>
+    <gateway service-interface="guru.springframework.si.gateways.PaymentGateway"/>
+
+    <channel id="verifyAddressChannel"/>
+    <service-activator input-channel="verifyAddressChannel" ref="addressService" method="verifyAddress"/>
+
+    <channel id="verifyOrderInventoryChannel"/>
+    <service-activator input-channel="verifyOrderInventoryChannel" ref="inventoryService" method="verifyInventory"/>
+
+    <channel id="verifyCreditCardChannel"/>
+    <service-activator input-channel="verifyCreditCardChannel" ref="paymentService" method="verifyPayment"/>
+
+    <channel id="validateOrderChannel"/>
+    <service-activator input-channel="validateOrderChannel" ref="orderService" method="validateOrder"/>
+
+    <channel id="placeOrderChannel"/>
+    <service-activator input-channel="placeOrderChannel" ref="orderService" method="placeOrder"/>
+
+
 </beans:beans>

@@ -1,4 +1,4 @@
-package guru.springframework.si.testservice;
+package guru.springframework.si.services;
 
 import guru.springframework.si.model.Product;
 import org.springframework.stereotype.Service;
