@@ -70,13 +70,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Errors validateOrder(PlaceOrderCommand command) {
-        System.out.println("Validating Order.....");
+        System.out.println(Thread.currentThread().getId() + " : Validating Order.....");
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("Validating Order - DONE");
+        System.out.println(Thread.currentThread().getId() + " : Validating Order - DONE");
         Errors errors = new BeanPropertyBindingResult(command, "Place Order Command");
         return errors;
     }
